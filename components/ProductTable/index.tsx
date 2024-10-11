@@ -107,15 +107,51 @@ const ProductTable = () => {
 
   const table = useMaterialReactTable({
     columns,
-    enableColumnFilterModes: true,
-    initialState: { showColumnFilters: true }, // Mostrar filtros por defecto
+    initialState: {
+      showColumnFilters: true,
+      columnFilters: [{ id: "estado", value: "activo" }],
+    }, // Mostrar filtros por defecto
     data: products, // Los datos deben ser memorizados o estables
-    enableRowSelection: true, //
+    enableRowSelection: true,
+    state: {
+      isLoading: isLoading, //cell skeletons and loading overlay
+      showProgressBars: isLoading, //progress bars while refetching
+      isSaving: isLoading, //progress bars and save button spinners
+    },
+    muiTableHeadCellProps: {
+      sx: {
+        fontWeight: 800,
+        fontSize: "14px",
+        backgroundColor: "#74b9ff",
+      },
+    },
+    localization: {
+      clearSort: "Limpiar orden",
+      clearFilter: "Limpiar filtro",
+      filterByColumn: "Filtrar por {column}",
+      sortByColumnDesc: "Ordenar por {column} descendente",
+      sortByColumnAsc: "Ordenar por {column} ascendente",
+      hideColumn: "Ocultar columna {column}",
+      hideAll: "Ocultar todo",
+      showAll: "Mostrar todo",
+      showAllColumns: "Mostrar todas las columnas",
+      showHideColumns: "Mostrar/ocultar columnas",
+      showHideSearch: "Mostrar/ocultar búsqueda",
+      showHideFilters: "Mostrar/ocultar filtros",
+      search: "Buscar",
+      toggleDensity: "Cambiar densidad",
+      toggleFullScreen: "Cambiar pantalla completa",
+      rowsPerPage: "Filas por página",
+      clearSelection: "Limpiar selección",
+      selectedCountOfRowCountRowsSelected: "{selectedCount} de {rowCount} filas seleccionadas",
+    },
   });
 
-  return isLoading ? (
-    <div>Cargando...</div>
-  ) : <MaterialReactTable table={table} />;
+  return (
+    <div className="p-5">
+      <MaterialReactTable table={table} />
+    </div>
+  );
 };
 
 export default ProductTable;

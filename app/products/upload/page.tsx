@@ -4,14 +4,14 @@ import React, { useEffect, useState } from "react";
 import { parse } from "csv-parse/browser/esm"; // Importa csv-parse
 import { MaterialReactTable, type MRT_ColumnDef } from "material-react-table";
 import { Paper, Button, CircularProgress } from "@mui/material"; // Importa CircularProgress para la carga
+import TableSkeleton from "@/components/TableSkeleton";
 
 const UploadFile = () => {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true); // Estado de carga
 
   useEffect(() => {
-
-      setLoading(false); // Detener la carga solo si está autenticado
+      setLoading(true); // Detener la carga solo si está autenticado
   }, []);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,7 +59,7 @@ const UploadFile = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <CircularProgress /> {/* Indicador de carga */}
+        <TableSkeleton />
       </div>
     );
   }
