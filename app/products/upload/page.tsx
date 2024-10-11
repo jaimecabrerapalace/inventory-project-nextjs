@@ -3,15 +3,15 @@
 import React, { useEffect, useState } from "react";
 import { parse } from "csv-parse/browser/esm"; // Importa csv-parse
 import { MaterialReactTable, type MRT_ColumnDef } from "material-react-table";
-import { Paper, Button, CircularProgress } from "@mui/material"; // Importa CircularProgress para la carga
+import { Paper, Button } from "@mui/material"; // Importa CircularProgress para la carga
 import TableSkeleton from "@/components/TableSkeleton";
 
 const UploadFile = () => {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<object[]>([]);
   const [loading, setLoading] = useState(true); // Estado de carga
 
   useEffect(() => {
-      setLoading(true); // Detener la carga solo si está autenticado
+      setLoading(false); // Detener la carga solo si está autenticado
   }, []);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +43,7 @@ const UploadFile = () => {
     }
   };
 
-  const columns: MRT_ColumnDef<any>[] = React.useMemo(() => {
+  const columns: MRT_ColumnDef<object>[] = React.useMemo(() => {
     if (data.length === 0) return [];
     return Object.keys(data[0]).map((key) => ({
       accessorKey: key,

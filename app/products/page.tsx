@@ -2,7 +2,7 @@
 
 import ProductTable from "@/components/ProductTable"
 
-const ProductPage = async () => {
+const ProductPage =  () => {
 
   return (
     <div className="p-8">

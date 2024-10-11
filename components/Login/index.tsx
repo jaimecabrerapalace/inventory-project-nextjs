@@ -9,7 +9,6 @@ import { signIn } from "next-auth/react";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const router = useRouter();
   const notifyError = () => toast.error("Error al iniciar sesión");
   const notifySuccess = () => toast.success("Inicio de sesión exitoso");
@@ -22,9 +21,9 @@ const Login = () => {
       password,
     });
     if (result?.error) {
-      setError(result.error);
       notifyError();
     }
+    notifySuccess();
     router.push("/products/upload");
   };
 
